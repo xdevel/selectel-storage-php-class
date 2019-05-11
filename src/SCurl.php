@@ -182,7 +182,7 @@ class SCurl
     {
         $result = array();
         $code = explode("\r\n", $head);
-        $result['HTTP-Code'] = intval(str_replace("HTTP/1.1", "", $code[0]));
+        $result['HTTP-Code'] = (int)curl_getinfo($this->ch, CURLINFO_HTTP_CODE);
         preg_match_all("/([A-z\-]+)\: (.*)\r\n/", $head, $matches, PREG_SET_ORDER);
         foreach ($matches as $match)
             $result[strtolower($match[1])] = $match[2];
